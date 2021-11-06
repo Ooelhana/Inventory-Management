@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const recordSchema = new mongoose.Schema({
-    description: String,
-    complete: Boolean,
+    name: String,   
+    employee: String,
+    quantity: Number,
 });
 
 module.exports.Record = mongoose.model("Record", recordSchema);
