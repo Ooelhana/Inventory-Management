@@ -1,6 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { postRecord } from "../api/records";
 
+import "./NewRecordForm.css";
+
 export default function NewRecordForm() {
     // Record input state
     const [name, setName] = useState<string>("");
@@ -31,10 +33,10 @@ export default function NewRecordForm() {
     return (
         <>
             <form onSubmit={(e) => createRecord(e)}>
-                <div className="new-expense">
-                    <div className="new-expense__controls">
-                        <div className="new-expense__control">
-                            <label>Name</label>
+                <div className="new-record-box">
+                    <div className="record-inputs">
+                        <div className="record-input">
+                            <label>Item Name:</label>
                             <input
                                 type="text"
                                 value={name}
@@ -42,7 +44,8 @@ export default function NewRecordForm() {
                                 required={true}
                             />
                         </div>
-                        <div className="new-expense__control">
+
+                        <div className="record-input">
                             <label>Employee Name:</label>
                             <input
                                 type="text"
@@ -54,7 +57,8 @@ export default function NewRecordForm() {
                                 required={true}
                             />
                         </div>
-                        <div className="new-expense__control">
+
+                        <div className="record-input">
                             <label>Quantity:</label>
                             <input
                                 type="number"
@@ -64,7 +68,8 @@ export default function NewRecordForm() {
                             />
                         </div>
                     </div>
-                    <div className="new-expense__actions">
+
+                    <div className="record-button">
                         <button type="submit">Add Inventory Record</button>
                     </div>
                 </div>

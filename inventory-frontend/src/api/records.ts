@@ -41,6 +41,7 @@ export async function postRecord(
     }).then((response) => {
         if (response.status === 201) {
             // Success
+            getRecords();
         } else {
             // Error
         }
