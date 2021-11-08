@@ -10,7 +10,14 @@ var usersRouter = require("./routes/users");
 var recordsRouter = require("./routes/records");
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://mongodb:27017/inventory", {
+
+if (process.env.NODE_ENV == "test") {
+    var mongoURI = "mongodb://mongodb:27017/test_inventory";
+} else {
+    var mongoURI = "mongodb://mongodb:27017/inventory";
+}
+
+mongoose.connect(mongoURI, {
     useNewUrlParser: true,
 });
 
@@ -35,7 +42,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors({origin: `http://localhost:3001`}));
+app.use(cors({ origin: `http://localhost:3001` }));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);

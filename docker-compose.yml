@@ -1,38 +1,38 @@
-version: '3.4'
+version: "3.4"
 
 services:
-  inventory-backend:
-    image: inventorybackend
-    build:
-      context: ./inventory-backend
-      dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
-    ports:
-      - 3000:3000
-    volumes:
-      - ./inventory-backend:/usr/src/app
-    links:
-      - mongodb
+    inventory-backend:
+        image: inventorybackend
+        build:
+            context: ./inventory-backend
+            dockerfile: ./Dockerfile
+        environment:
+            NODE_ENV: production
+        ports:
+            - 3000:3000
+        volumes:
+            - ./inventory-backend:/usr/src/app
+        links:
+            - mongodb
 
-  inventory-frontend:
-    image: inventoryfrontend
-    build:
-      context: ./inventory-frontend
-      dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
-    ports:
-      - 5000:5000
-    volumes:
-      - ./inventory-frontend:/usr/src/app
-  
-  mongodb:
-    image: mongo:latest
-    ports:
-      - 27017:27017
-    volumes:
-      - data:/data/db
+    # inventory-frontend:
+    #   image: inventoryfrontend
+    #   build:
+    #     context: ./inventory-frontend
+    #     dockerfile: ./Dockerfile
+    #   environment:
+    #     NODE_ENV: production
+    #   ports:
+    #     - 5000:5000
+    #   volumes:
+    #     - ./inventory-frontend:/usr/src/app
+
+    mongodb:
+        image: mongo:latest
+        ports:
+            - 27017:27017
+        volumes:
+            - data:/data/db
 
 volumes:
-  data:
+    data:
