@@ -13,6 +13,7 @@ function App() {
                 <NewRecordForm />
                 <RecordList />
             </div>
+            <div id="modal-root"></div>
         </Provider>
     );
 }
