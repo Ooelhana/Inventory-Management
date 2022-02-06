@@ -1,34 +1,41 @@
-import { Button } from "antd";
+import { Button, Table } from "antd";
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import AddEmployeeModal from "./AddEmployeeModal";
 
-// Add, remove and view employees in the application
-export default function EmployeeManage() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+interface EmployeeManageProps {
+    employees: Employee[];
+}
 
-    const rootNode = document.getElementById("root") as HTMLElement;
+// Add, remove and view employees in the application
+export default function EmployeeManage({ employees }: EmployeeManageProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Open the add employee modal after button click
     function addEmployeeButtonHandler() {
         setIsModalOpen(true);
     }
 
+    const dataSource = employees.map((item) => {
+        return { key: item._id, name: item.name };
+    });
+    const columns = [
+        {
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+        },
+    ];
+
     return (
-        <div id="modal-root">
+        <>
+            <Table dataSource={dataSource} columns={columns} />
             <Button
                 data-testid="add-employee-button"
                 onClick={addEmployeeButtonHandler}
             >
                 Add Employee
             </Button>
-            {createPortal(
-                <AddEmployeeModal
-                    isOpen={isModalOpen}
-                    setIsOpen={setIsModalOpen}
-                />,
-                rootNode
-            )}
-        </div>
+            <AddEmployeeModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+        </>
     );
 }

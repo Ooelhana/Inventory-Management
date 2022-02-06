@@ -2,33 +2,34 @@ import { render, screen } from "@testing-library/react";
 import EmployeeManage from "../../components/manage/EmployeeManage";
 
 describe("tests employee manage list", () => {
-    beforeEach(() => {
-        // Add modal root div for react portal
-        const modalRoot = document.createElement("div");
-        modalRoot.setAttribute("id", "modal-root");
-        document.body.appendChild(modalRoot);
-    });
-
     test("tests that add button exists", () => {
         // Load component
-        render(<EmployeeManage />);
+        render(<EmployeeManage employees={[]} />);
         // Check that add button exists
-        expect(screen.getByTestId("add-employee-button"));
+        expect(screen.queryByTestId("add-employee-button")).toBeInTheDocument();
     });
 
     test("tests that add button opens create employee modal", () => {
         // Load component
-        render(<EmployeeManage />);
+        render(<EmployeeManage employees={[]} />);
         // Click add button and check that modal opens up
+
         const addEmployeeButton = screen.getByTestId("add-employee-button");
         addEmployeeButton.click();
-        expect(screen.getByTestId("add-employee-modal"));
+        expect(screen.queryByTestId("add-employee-modal")).toBeDefined();
     });
 
     test("tests that employees exist on load", async () => {
-        fetch("http://localhost:8000/employees").then(() => {
-            console.log("here");
-        });
+        // Load component with sample data
+        const sampleEmployee: Employee = {
+            _id: "123",
+            name: "Jim Jenkins",
+            __v: "1",
+        };
+        render(<EmployeeManage employees={[sampleEmployee]} />);
+
+        // Check that employee is correctly rendered in the table
+        expect(screen.queryByText("Jim Jenkins")).toBeDefined();
     });
 
     test("tests that remove employee opens the remove employee modal", () => {});

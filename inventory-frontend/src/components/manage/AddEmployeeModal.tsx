@@ -1,10 +1,12 @@
 import Modal from "antd/lib/modal/Modal";
+import { Button } from "antd";
 
 interface AddEmployeeModalProps {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
 }
 
+// Modal for adding a new employee
 export default function AddEmployeeModal({
     isOpen,
     setIsOpen,
@@ -23,6 +25,18 @@ export default function AddEmployeeModal({
             visible={isOpen}
             onOk={addEmployeeHandler}
             onCancel={closeModal}
+            title={"Add Employee"}
+            footer={
+                <>
+                    <Button
+                        data-testid={"cancel-modal-button"}
+                        onClick={closeModal}
+                    >
+                        Cancel
+                    </Button>
+                    <Button type="primary">Add Employee</Button>
+                </>
+            }
         ></Modal>
     );
 }
