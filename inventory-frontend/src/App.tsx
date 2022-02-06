@@ -1,19 +1,16 @@
 import "./App.css";
 import "antd/dist/antd.css";
 
-import RecordList from "./components/RecordList";
-import NewRecordForm from "./components/NewRecordForm";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import EmployeeManage from "./components/manage/EmployeeManage";
 
 function App() {
     return (
         <Provider store={store}>
             <div className="page">
-                <NewRecordForm />
-                <RecordList />
+                <EmployeeManage />
             </div>
-            <div id="modal-root"></div>
         </Provider>
     );
 }

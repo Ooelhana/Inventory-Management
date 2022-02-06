@@ -7,7 +7,7 @@ import AddEmployeeModal from "./AddEmployeeModal";
 export default function EmployeeManage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const rootNode = document.getElementById("modal-root") as HTMLElement;
+    const rootNode = document.getElementById("root") as HTMLElement;
 
     // Open the add employee modal after button click
     function addEmployeeButtonHandler() {
@@ -15,7 +15,7 @@ export default function EmployeeManage() {
     }
 
     return (
-        <>
+        <div id="modal-root">
             <Button
                 data-testid="add-employee-button"
                 onClick={addEmployeeButtonHandler}
@@ -29,6 +29,6 @@ export default function EmployeeManage() {
                 />,
                 rootNode
             )}
-        </>
+        </div>
     );
 }
